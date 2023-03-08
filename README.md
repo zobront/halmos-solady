@@ -2,6 +2,21 @@
 
 Halmos is particularly good at quickly proving equivalence between functions. Let's use it to verify Solady vs Solmate.
 
+## FixedPointMathLib Functions
+
+- [x] mulWad
+- [ ] mulWadUp
+- [ ] divWad
+- [ ] divWadUp
+- [ ] mulDivDown
+- [ ] mulDivUp
+- [ ] rpow
+- [x] sqrt
+- [ ] unsafeMod
+- [ ] unsafeDiv
+- [ ] unsafeDivUp
+
+## Detailed Breakdown
 ### ✅ sqrt()
 
 To run:
@@ -16,17 +31,3 @@ To run:
 - `halmos --function test__MulWadCorrectnessAndEquivalence` (proves correctness of both implementations and equivalence)
 
 Explanation: This one is relatively simple with minimal division, so Halmos can handle the functions as-is. We simply compare them both to a non-assembly non-optimized version, and prove equivalence.
-
-### To Do
-
-- [x] mulWad
-- [ ] mulWadUp
-- [ ] divWad
-- [ ] divWadUp
-- [ ] mulDivDown
-- [ ] mulDivUp
-- [ ] rpow
-- [x] sqrt
-- [ ] unsafeMod
-- [ ] unsafeDiv
-- [ ] unsafeDivUp
