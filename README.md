@@ -2,7 +2,7 @@
 
 Halmos is particularly good at quickly proving equivalence between functions. Let's use it to verify Solady vs Solmate.
 
-### Sqrt
+### ✅ sqrt()
 
 All differences between the two implementations exist in the first half of the function, so we abstract out the second (identical) half, to leave just the differences.
 
@@ -13,3 +13,16 @@ All differences between the two implementations exist in the first half of the f
 To run:
 - `forge test --match test__SqrtCorrectness`
 - `halmos --function test__SqrtEquivalence`
+
+### To Do
+
+- [ ] mulWadDown
+- [ ] mulWadUp
+- [ ] divWadDown
+- [ ] divWadUp
+- [ ] mulDivDown
+- [ ] mulDivUp
+- [ ] rpow
+- [ ] unsafeMod
+- [ ] unsafeDiv
+- [ ] unsafeDivUp
