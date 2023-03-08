@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract MulWadUp {
-    uint256 public constant WAD = 1e18; // The scalar of ETH and most ERC20s.
-    uint256 public constant MAX_UINT256 = 2**256 - 1;
+import "./utils/Constants.sol";
 
+contract MulWadUp is Constants {
     function solmateMulWadUp(uint256 x, uint256 y) public pure returns (uint256 z) {
         /// @solidity memory-safe-assembly
         assembly {

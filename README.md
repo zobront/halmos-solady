@@ -1,9 +1,24 @@
-# Using Halmos to Verify Solady vs Solmate
+# Using Halmos to Formally Verify Solady's FixedPointMathLib
 
-Halmos is particularly good at quickly proving equivalence between functions. Let's use it to verify Solady vs Solmate.
+Halmos is a symbolic bounded model checker. It takes in EVM bytecode, converts it to a series of equations, and uses Z3 Theorem Prover to verify the assertion or find counterexamples.
+
+Z3 struggles with certain types of equations, so we can't just formally verify everything. Depending on the situation, either:
+- We can formally verify the full result
+- We can formally verify it's equivalence with a reference implementation (we use Solmate)
+- We can formally verify pieces of it vs a reference implementation
+- We aren't able to do anything useful :(
+
+This repo is a work in progress, focused on verifying the functions with to the highest degree possible.
+
+## Repo Organization
+
+Because of the limitations of deployed contract size in Halmos tests, all functions are broken apart into separate contracts in `./src`.
+
+Each function has a separate test in `test/`. Some tests are written for Foundry fuzzing, while others are written for Halmos. Instructions are provided at the top of each test file explaining how best to run each test.
 
 ## FixedPointMathLib Functions
 
+- [x] sqrt
 - [x] mulWad
 - [x] mulWadUp
 - [ ] divWad
@@ -11,7 +26,6 @@ Halmos is particularly good at quickly proving equivalence between functions. Le
 - [ ] mulDivDown
 - [ ] mulDivUp
 - [ ] rpow
-- [x] sqrt
 - [ ] unsafeMod
 - [ ] unsafeDiv
 - [ ] unsafeDivUp

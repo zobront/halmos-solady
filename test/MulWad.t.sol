@@ -4,8 +4,7 @@ pragma solidity ^0.8.0;
 import "forge-std/Test.sol";
 import "../src/MulWad.sol";
 
-// Minimal division, so Halmos is able to handle this one as-is.
-// so we abstract out the final (identical) piece, to leave just the differences.
+// Halmos is able to handle this one exactly as-is.
 
 // To run:
 // - `halmos --function test__MulWadCorrectnessAndEquivalence` (proves correctness of both implementations and equivalence)

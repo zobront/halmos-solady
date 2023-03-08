@@ -112,7 +112,7 @@ library FixedPointMathLib {
 
     /// @dev Equivalent to `x` to the power of `y`.
     /// because `x ** y = (e ** ln(x)) ** y = e ** (ln(x) * y)`.
-    function powWad(int256 x, int256 y) internal pure returns (int256) {
+    function powWad(int256 x, int256 y) public pure returns (int256) {
         // Using `ln(x)` means `x` must be greater than 0.
         return expWad((lnWad(x) * y) / int256(WAD));
     }
