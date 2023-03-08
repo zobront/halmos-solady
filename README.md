@@ -12,7 +12,7 @@ This repo is a work in progress, focused on verifying the functions with to the 
 
 ## Repo Organization
 
-Because of the limitations of deployed contract size in Halmos tests, all functions are broken apart into separate contracts in `./src`.
+Because of the limitations of deployed contract size in Halmos tests, all functions are broken apart into separate contracts in `src/`.
 
 Each function has a separate test in `test/`. Some tests are written for Foundry fuzzing, while others are written for Halmos. Instructions are provided at the top of each test file explaining how best to run each test.
 
