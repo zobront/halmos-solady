@@ -4,15 +4,11 @@ Halmos is particularly good at quickly proving equivalence between functions. Le
 
 ### ✅ sqrt()
 
-All differences between the two implementations exist in the first half of the function, so we abstract out the second (identical) half, to leave just the differences.
-
-`test__SqrtCorrectness` uses complete functions to test correctness using fuzz test.
-
-`test__SqrtEquivalence` uses the "stripped" version of the functions, with the identical part removed, to test equivalence.
-
 To run:
-- `forge test --match test__SqrtCorrectness`
-- `halmos --function test__SqrtEquivalence`
+- `forge test --match test__SqrtCorrectness` (fuzz for correctness of both versions)
+- `halmos --function test__SqrtEquivalence` (symbolic test of equivalence)
+
+Explanation: All differences between the two implementations exist in the first half of the function, so we abstract out the final (identical) piece, to leave just the differences. We can then test `solmateSqrt` and `soladySqrt` to ensure the changes didn't break anything. Then we can remove the call to the identical internal function. This leaves us with `solmateSqrtStripped` and `soladySqrtStripped`, which we can test for equivalence.
 
 ### To Do
 

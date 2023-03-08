@@ -1,7 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+// All differences between the two implementations exist in the first half of the function,
+// so we abstract out the final (identical) piece, to leave just the differences.
+
+// We can then test solmateSqrt and soladySqrt to ensure the changes didn't break anything.
+// Then we can remove the call to the identical internal function.
+// This leaves us with solmateSqrtStripped and soladySqrtStripped, which we can test for equivalence.
+
+// To run:
+// - `forge test --match test__SqrtCorrectness` (fuzz for correctness of both versions)
+// - `halmos --function test__SqrtEquivalence` (symbolic test of equivalence)
+
 contract Sqrt {
+    // The full Solmate function, with the final part abstracted out into its own function.
     function solmateSqrt(uint256 x) public pure returns (uint256 z) {
         assembly {
             let y := x
@@ -29,6 +41,7 @@ contract Sqrt {
         z = _secondHalfOfSqrtFunction(x, z);
     }
 
+    // The full Solmate function, with the final part removed because it's identical in both implementations.
     function solmateSqrtStripped(uint256 x) public pure returns (uint256 z) {
         assembly {
             let y := x
@@ -55,7 +68,7 @@ contract Sqrt {
         }
     }
 
-    /// @dev Returns the square root of `x`.
+    // The full Solady function, with the final part abstracted out into its own function.
     function soladySqrt(uint256 x) public pure returns (uint256 z) {
         assembly {
             z := 181
@@ -71,7 +84,7 @@ contract Sqrt {
         z = _secondHalfOfSqrtFunction(x, z);
     }
 
-    /// @dev Returns the square root of `x`.
+    // The full Solady function, with the final part removed because it's identical in both implementations.
     function soladySqrtStripped(uint256 x) public pure returns (uint256 z) {
         assembly {
             z := 181
@@ -86,6 +99,7 @@ contract Sqrt {
         }
     }
 
+    // The final part of the original functions, which has been abstracted out for clarity.
     function _secondHalfOfSqrtFunction(uint256 x, uint256 z) public pure returns (uint256 ret) {
         assembly {
             z := shr(1, add(z, div(x, z)))
