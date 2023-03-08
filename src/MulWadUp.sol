@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract MulWad {
+contract MulWadUp {
     uint256 public constant WAD = 1e18; // The scalar of ETH and most ERC20s.
     uint256 public constant MAX_UINT256 = 2**256 - 1;
 
-    function solmateMulWadDown(uint256 x, uint256 y) public pure returns (uint256 z) {
+    function solmateMulWadUp(uint256 x, uint256 y) public pure returns (uint256 z) {
         /// @solidity memory-safe-assembly
         assembly {
             // Equivalent to require(denominator != 0 && (y == 0 || x <= type(uint256).max / y))
@@ -13,12 +13,13 @@ contract MulWad {
                 revert(0, 0)
             }
 
-            // Divide x * y by the denominator.
-            z := div(mul(x, y), WAD)
+            // If x * y modulo the denominator is strictly greater than 0,
+            // 1 is added to round up the division of x * y by the denominator.
+            z := add(gt(mod(mul(x, y), WAD), 0), div(mul(x, y), WAD))
         }
     }
 
-    function soladyMulWad(uint256 x, uint256 y) public pure returns (uint256 z) {
+    function soladyMulWadUp(uint256 x, uint256 y) public pure returns (uint256 z) {
         /// @solidity memory-safe-assembly
         assembly {
             // Equivalent to `require(y == 0 || x <= type(uint256).max / y)`.
@@ -28,7 +29,7 @@ contract MulWad {
                 // Revert with (offset, size).
                 revert(0x1c, 0x04)
             }
-            z := div(mul(x, y), WAD)
+            z := add(iszero(iszero(mod(mul(x, y), WAD))), div(mul(x, y), WAD))
         }
     }
 }

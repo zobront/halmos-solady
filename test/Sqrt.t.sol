@@ -4,6 +4,17 @@ pragma solidity ^0.8.0;
 import "forge-std/Test.sol";
 import "../src/Sqrt.sol";
 
+// All differences between the two implementations exist in the first half of the function,
+// so we abstract out the final (identical) piece, to leave just the differences.
+
+// We can then test `solmateSqrt` and `soladySqrt` with a fuzz test to ensure the changes didn't break anything.
+// Once this is provide, we can remove the call to the identical internal function,
+// leaving `solmateSqrtStripped` and `soladySqrtStripped`, which we can test for equivalence with Halmos.
+
+// To run:
+// - `forge test --match test__SqrtCorrectness` (fuzz for correctness of both versions)
+// - `halmos --function test__SqrtEquivalence` (symbolic test of equivalence)
+
 contract SqrtTests is Test {
     Sqrt c;
 

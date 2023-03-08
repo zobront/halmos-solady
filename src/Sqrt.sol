@@ -1,17 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// All differences between the two implementations exist in the first half of the function,
-// so we abstract out the final (identical) piece, to leave just the differences.
-
-// We can then test solmateSqrt and soladySqrt to ensure the changes didn't break anything.
-// Then we can remove the call to the identical internal function.
-// This leaves us with solmateSqrtStripped and soladySqrtStripped, which we can test for equivalence.
-
-// To run:
-// - `forge test --match test__SqrtCorrectness` (fuzz for correctness of both versions)
-// - `halmos --function test__SqrtEquivalence` (symbolic test of equivalence)
-
 contract Sqrt {
     // The full Solmate function, with the final part abstracted out into its own function.
     function solmateSqrt(uint256 x) public pure returns (uint256 z) {
