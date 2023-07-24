@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol";
-import "../src/Sqrt.sol";
+import "../src/functions/Sqrt.sol";
 
 // All differences between the two implementations exist in the first half of the function,
 // so we abstract out the final (identical) piece, to leave just the differences.
@@ -13,7 +13,7 @@ import "../src/Sqrt.sol";
 
 // To run:
 // - `forge test --match test__SqrtCorrectness` (fuzz for correctness of both versions)
-// - `halmos --function test__SqrtEquivalence` (symbolic test of equivalence)
+// - `halmos --function testCheck__SqrtEquivalence` (symbolic test of equivalence)
 
 contract SqrtTests is Test {
     Sqrt c;
@@ -35,7 +35,8 @@ contract SqrtTests is Test {
     }
 
     // Symbolic test to confirm that the differences between two functions result in same output.
-    function test__SqrtEquivalence(uint x) public {
+    /// @custom:halmos --solver-timeout-assertion 0
+    function testCheck__SqrtEquivalence(uint x) public {
         uint solmate = c.solmateSqrtStripped(x);
         uint solady = c.soladySqrtStripped(x);
         assertEq(solmate, solady);

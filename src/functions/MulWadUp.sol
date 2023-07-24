@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./utils/Constants.sol";
+import "../utils/Constants.sol";
 
 contract MulWadUp is Constants {
     function solmateMulWadUp(uint256 x, uint256 y) public pure returns (uint256 z) {
