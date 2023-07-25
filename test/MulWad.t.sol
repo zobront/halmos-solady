@@ -2,12 +2,12 @@
 pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol";
-import "../src/MulWad.sol";
+import "../src/functions/MulWad.sol";
 
 // Halmos is able to handle this one exactly as-is.
 
 // To run:
-// - `halmos --function test__MulWadCorrectnessAndEquivalence` (proves correctness of both implementations and equivalence)
+// - `halmos --function testCheck__MulWadCorrectnessAndEquivalence` (proves correctness of both implementations and equivalence)
 
 contract MulWadTests is Test {
     MulWad c;
@@ -17,7 +17,7 @@ contract MulWadTests is Test {
     }
 
     // Fuzz test to check that both mulWad functions appear to be correct.
-    function test__MulWadCorrectnessAndEquivalence(uint128 _x, uint128 _y) public {
+    function testCheck__MulWadCorrectnessAndEquivalence(uint128 _x, uint128 _y) public {
         uint x = uint(_x);
         uint y = uint(_y);
 

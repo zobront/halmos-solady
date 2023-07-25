@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol";
-import "src/PowWad.sol";
+import "../../src/functions/PowWad.sol";
 
 // This one doesn't work for Halmos because it requires SIGNEXTEND op code, which isn't implemented yet.
 
