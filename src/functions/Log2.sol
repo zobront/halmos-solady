@@ -4,14 +4,14 @@ pragma solidity ^0.8.0;
 contract Log2 {
 
     // Code that is correct -- log2 is the most significant 1 bit 
+    // Note: log2(0) returns 0 instead of reverting
     function correctLog2(uint256 x) public pure returns (uint256 r) {
-		    
-				for(r = 255; r >= 0; r--) {
-						if (x >> r & uint256(1) == 1) {
-								break;
-						}
-				}
-		}
+        for(r = 255; r >= 0; r--) {
+            if (x >> r & uint256(1) == 1) {
+                break;
+            }
+        }
+    }
 
     function soladyLog2(uint256 x) public pure returns (uint256 r) {
         /// @solidity memory-safe-assembly
