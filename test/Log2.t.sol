@@ -9,7 +9,7 @@ import "../src/functions/Log2.sol";
 // To run:
 // - `halmos --match-test Log2 --loop 256 --function test` (proves that Solady log 2 matches the definition)
 
-contract MulWadTests is Test {
+contract Log2Tests is Test {
     Log2 c;
 
     function setUp() public {
