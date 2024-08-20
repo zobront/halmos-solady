@@ -21,6 +21,7 @@ Each function has a separate test in `test/`. Some tests are written for Foundry
 - [x] sqrt
 - [x] mulWad
 - [x] mulWadUp
+- [x] log2 
 - [ ] divWad
 - [ ] divWadUp
 - [ ] mulDivDown
@@ -53,3 +54,10 @@ To run:
 - `halmos --function test__MulWadUpEquivalence` (proves equivalence of two implementations)
 
 Explanation: Halmos isn't able to prove the correctness, because the math to get the correct value in pure Solidity is too complex. So we prove the correctness with a fuzz test and then prove the equivalence of the two full functions with Halmos.
+
+### ✅ log2()
+
+To run:
+- `halmos --match-test Log2 --loop 256 --function test` (symbolic test of equivalence)
+
+Explanation: The Solady code is verified to be correct by definition. The definition of log2 is the most significant bit that is set to 1. This test proves the equivalence between the Solady code and (much less efficient but simple code) that loops over the bits and returns the index of the most significant one. Note that that log2(0) is undefined, but the code returns 0 for that case. Because the reference code uses a for loop, we need to explicitly tell Halmos to unwrap the loop 256 times to ensure the code paths are fully explored.
